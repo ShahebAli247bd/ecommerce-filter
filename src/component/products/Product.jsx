@@ -3,7 +3,7 @@ import "./Product.css";
 import { SiNetdata } from "react-icons/si";
 import FetchApi from "../../utiles/FetchApi";
 import Card from "./Card";
-import NotFound from "../NotFound/NotFound";
+import NotFound from "../notfound/NotFound";
 
 const Product = ({ inputTerms }) => {
     console.log(inputTerms);
