@@ -44,7 +44,7 @@ const Product = ({ inputTerms }) => {
     return (
         <div className="product-container">
             <h1>
-                Recommended Total:{" "}
+                Total:{" "}
                 <span>{filteredData.length ? filteredData.length : 0} </span>
                 {inputTerms ? inputTerms.toSentenceCase() : "Items"}
             </h1>
