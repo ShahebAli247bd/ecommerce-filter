@@ -1,0 +1,14 @@
+.centerIt{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100%;
+ width: 100%;
+ flex-direction: column;
+}
+.centerIt h1{
+ color:#888888;
+}
+.centerIt h2{
+ color:#5a5a5a;
+}

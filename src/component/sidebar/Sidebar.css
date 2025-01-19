@@ -1,0 +1,15 @@
+.sidebar{
+ min-height: 100vh;
+ background: #f7f7f7;
+ min-width:20rem;
+ max-width:20rem;
+ width:20rem;
+ padding: 2rem;
+
+}
+
+@media  screen and (max-width: 768px) {
+ .sidebar{
+ display:none;
+ }
+}
