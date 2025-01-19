@@ -44,15 +44,16 @@ const Product = ({ inputTerms }) => {
     return (
         <div className="product-container">
             <h1>
-                Recommended Total: <span>{filteredData?.length? filteredData?.length : 0} </span>
-                {inputTerms ? inputTerms?.toSentenceCase() : "Items"}
+                Recommended Total:{" "}
+                <span>{filteredData.length ? filteredData.length : 0} </span>
+                {inputTerms ? inputTerms.toSentenceCase() : "Items"}
             </h1>
             <div className="product">
                 {isLoading ? <span className="loading">Loading...</span> : ""}
-                {filteredData?.length >= 0 &&
-                    filteredData?.map((book) => <Card book={book} />)}
+                {filteredData.length >= 0 &&
+                    filteredData.map((book) => <Card book={book} />)}
             </div>
-            {!filteredData?.length && !isLoading && (
+            {!filteredData.length && !isLoading && (
                 <NotFound inputTerms={inputTerms} />
             )}
         </div>
