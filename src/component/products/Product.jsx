@@ -5,7 +5,7 @@ import FetchApi from "../../utiles/FetchApi";
 import Card from "./Card";
 import NotFound from "../notfound/NotFound";
 
-const Product = ({ inputTerms }) => {
+const Product = ({ inputTerms, HandleAddToCardData }) => {
     // console.log(inputTerms);
     String.prototype.toSentenceCase = function () {
         return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
@@ -13,6 +13,13 @@ const Product = ({ inputTerms }) => {
 
     const [fetchData, setFetchData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isItemExistInCart, setIsItemExistInCart] = useState(false);
+
+    //Call data in refresh
+    useEffect(() => {
+        setIsLoading(true);
+        getData();
+    }, []);
 
     const cache = {
         data: localStorage.getItem("data")
@@ -21,8 +28,42 @@ const Product = ({ inputTerms }) => {
         lastFetched: null,
     };
 
+    //add To cart Object create and save to localstorage
+    const handlerBuyNow = (id) => {
+        const selectedProd = fetchData.filter((prod) =>
+            prod.id.toLowerCase().includes(id.toLowerCase())
+        );
+
+        // Get the current cart data from localStorage
+        const savedProduct = localStorage.getItem("addToCartData");
+        const parsedSavedProduct = savedProduct ? JSON.parse(savedProduct) : [];
+
+        const isItemInCart = parsedSavedProduct.some((book) => {
+            (book) =>
+                book.id.toLowerCase() === selectedProd[0]?.id.toLowerCase();
+        });
+
+        if (isItemInCart) {
+            console.log("Item already exists in the cart");
+            setIsItemExistInCart(true); // Update the state to reflect the item exists
+            return;
+        }
+
+        
+        const updatedCartData = [...parsedSavedProduct, ...selectedProd];
+
+        
+        localStorage.setItem("addToCartData", JSON.stringify(updatedCartData)); // Save as a JSON string
+
+        console.log("Item added to the cart");
+            
+        setIsItemExistInCart(false); // Reset the state for the next addition
+        HandleAddToCardData(updatedCartData);
+    };
+
     const getData = async () => {
         try {
+            //Cacheing Machanisum
             if (cache.data.length > 0) {
                 console.log("Using cached data");
                 console.log(cache.data);
@@ -52,12 +93,6 @@ const Product = ({ inputTerms }) => {
         }
     };
 
-    //Call data in refresh
-    useEffect(() => {
-        setIsLoading(true);
-        getData();
-    }, []);
-
     //Filtered Data using input Terms
     const filteredData =
         fetchData?.length >= 0
@@ -84,9 +119,11 @@ const Product = ({ inputTerms }) => {
             <div className="product">
                 {isLoading ? <span className="loading">Loading...</span> : ""}
                 {filteredData.length >= 0 &&
-                    filteredData.map((book) => <Card book={book} />)}
+                    filteredData.map((book) => (
+                        <Card book={book} handlerBuyNow={handlerBuyNow} />
+                    ))}
             </div>
-            {!filteredData.length && !isLoading && (
+            {!filteredData.length <= 0 && !isLoading && (
                 <NotFound inputTerms={inputTerms} />
             )}
         </div>

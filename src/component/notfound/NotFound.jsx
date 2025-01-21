@@ -6,10 +6,10 @@ const NotFound = ({inputTerms}) => {
       <div className="centerIt">
           <h2>
           
-              {inputTerms? inputTerms: "Items "}
+              {inputTerms? inputTerms: "No Item "}
           </h2>
 
-          <h1> Not Found</h1>
+          <h1> Found</h1>
       </div>
   );
 }

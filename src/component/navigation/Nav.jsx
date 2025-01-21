@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from '../../assets/logo.png'
 import { AiOutlineShoppingCart, AiOutlineUserAdd } from 'react-icons/ai'
 import './Nav.css'
+import AddToCart from './AddToCart';
 
 
-const Nav = ({ inputHandler }) => {
+const Nav = ({ inputHandler, addToCartData }) => {
+    const [showCart, setShowCart] = useState(false)
+
     return (
         <header>
             <nav>
@@ -13,7 +16,7 @@ const Nav = ({ inputHandler }) => {
                 </div>
                 <div className="inputField">
                     <input
-                        placeholder='Search book...'
+                        placeholder="Search book..."
                         type="text"
                         name="input"
                         onChange={(e) => inputHandler(e.target.value)}
@@ -21,9 +24,31 @@ const Nav = ({ inputHandler }) => {
                 </div>
                 <div className="headerIcon">
                     <AiOutlineUserAdd className="icon" />
-                    <AiOutlineShoppingCart className="icon" />
+                    <span
+                        className="addToCartIconContainer"
+                        onClick={() => setShowCart(true)}
+                    >
+                        <AiOutlineShoppingCart className="icon" />
+                        <span className="items">{addToCartData.length}</span>
+                    </span>
                 </div>
             </nav>
+            {/*<div className="cartContainer">
+                <CgClose className="close" onClick={handleClose} />
+                {showCart &&
+                    addToCartData.map((book) => (
+                        <AddToCart
+                            book={book}
+                            handleClose={() => setShowCart(false)}
+                        />
+                    ))}
+            </div>*/}
+            {showCart && (
+                <AddToCart
+                    addToCartData={addToCartData}
+                    handleClose={() => setShowCart(false)}
+                />
+            )}
         </header>
     );
 };

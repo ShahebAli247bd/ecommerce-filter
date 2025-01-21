@@ -1,0 +1,58 @@
+.cartContainer{
+position: absolute;
+top:0px;
+right:0px;
+width:500px;
+background-color: #e3e3e3;
+padding: 1rem;
+height: 100vh;
+overflow-y: auto; /* Enables vertical scrolling when content overflows */
+scroll-behavior: smooth; /* Smooth scrolling behavior */
+}
+/* Scrollbar styles */
+.cartContainer::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.cartContainer::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background color of the scrollbar track */
+    border-radius: 10px; /* Rounded corners for the track */
+}
+
+.cartContainer::-webkit-scrollbar-thumb {
+    background: #c1c1c1; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the thumb */
+    border: 2px solid #f1f1f1; /* Optional border for contrast */
+}
+
+.cartContainer::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1; /* Darker color when hovering over the scrollbar */
+}
+.cartContent{
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ width: 100%;
+ border-bottom:1px solid #bfbfbf
+}
+
+.counter{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: column;
+}
+.counter button{
+ margin: 0;
+}
+.close{
+ width:20px;
+ height: 20px;
+ background: red;
+ border-radius: 50%;
+ padding:5px;
+ color:#fff;
+}
+.close:hover{
+ background-color: green;
+}
