@@ -5,8 +5,8 @@ import './Nav.css'
 import AddToCart from './AddToCart';
 
 
-const Nav = ({ inputHandler, addToCartData }) => {
-    const [showCart, setShowCart] = useState(false)
+const Nav = ({ inputHandler, addToCartData, handleDelete }) => {
+    const [showCart, setShowCart] = useState(false);
 
     return (
         <header>
@@ -33,20 +33,12 @@ const Nav = ({ inputHandler, addToCartData }) => {
                     </span>
                 </div>
             </nav>
-            {/*<div className="cartContainer">
-                <CgClose className="close" onClick={handleClose} />
-                {showCart &&
-                    addToCartData.map((book) => (
-                        <AddToCart
-                            book={book}
-                            handleClose={() => setShowCart(false)}
-                        />
-                    ))}
-            </div>*/}
+
             {showCart && (
                 <AddToCart
                     addToCartData={addToCartData}
                     handleClose={() => setShowCart(false)}
+                    handleDelete={handleDelete}
                 />
             )}
         </header>

@@ -9,6 +9,7 @@ height: 100vh;
 overflow-y: auto; /* Enables vertical scrolling when content overflows */
 scroll-behavior: smooth; /* Smooth scrolling behavior */
 }
+
 /* Scrollbar styles */
 .cartContainer::-webkit-scrollbar {
     width: 8px; /* Width of the scrollbar */
@@ -33,7 +34,9 @@ scroll-behavior: smooth; /* Smooth scrolling behavior */
  justify-content: space-between;
  align-items: center;
  width: 100%;
- border-bottom:1px solid #bfbfbf
+ height: 80px;
+ border-bottom:1px solid #bfbfbf;
+ padding:5px 0;
 }
 
 .counter{

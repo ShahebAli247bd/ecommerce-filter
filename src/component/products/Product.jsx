@@ -44,21 +44,28 @@ const Product = ({ inputTerms, HandleAddToCardData }) => {
         });
 
         if (isItemInCart) {
+            
             console.log("Item already exists in the cart");
+           
             setIsItemExistInCart(true); // Update the state to reflect the item exists
             return;
         }
-
+       
         
         const updatedCartData = [...parsedSavedProduct, ...selectedProd];
 
+        const filteredData = updatedCartData.filter(
+            (item, index, array) =>
+                array.findIndex((i) => i.id === item.id) === index
+        );
+
         
-        localStorage.setItem("addToCartData", JSON.stringify(updatedCartData)); // Save as a JSON string
+        localStorage.setItem("addToCartData", JSON.stringify(filteredData)); // Save as a JSON string
 
         console.log("Item added to the cart");
             
         setIsItemExistInCart(false); // Reset the state for the next addition
-        HandleAddToCardData(updatedCartData);
+        HandleAddToCardData(filteredData);
     };
 
     const getData = async () => {

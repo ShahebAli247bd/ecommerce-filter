@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
-import Button from '../minicomp/Button';
-import './AddToCart.css'
-import { CgClose } from 'react-icons/cg';
-import NotFound from '../notfound/NotFound';
+import React, { useState } from "react";
+import Button from "../minicomp/Button";
+import "./AddToCart.css";
+import { CgClose } from "react-icons/cg";
+import NotFound from "../notfound/NotFound";
 
-const AddToCart = ({ addToCartData, handleClose }) => {
+const AddToCart = ({ addToCartData, handleClose, handleDelete }) => {
     const [counts, setCounts] = useState({}); // Initialize as an object
-
+    // const [cartData, setCartData] = useState(addToCartData)
+    console.log(counts);
     const handleIncrement = (id) => {
         setCounts((prevCounts) => ({
             ...prevCounts,
@@ -21,7 +22,6 @@ const AddToCart = ({ addToCartData, handleClose }) => {
         }));
     };
 
- 
     return (
         <>
             <div className="cartContainer">
@@ -39,7 +39,9 @@ const AddToCart = ({ addToCartData, handleClose }) => {
                             <div className="title">
                                 {book.volumeInfo.title.slice(0, 30)}...
                             </div>
-                            <div className="price">Price: $100</div>
+                            <div className="price">
+                                ${(counts[book.id] || 1) * 100}
+                            </div>
 
                             <div className="counter">
                                 <button
@@ -47,13 +49,17 @@ const AddToCart = ({ addToCartData, handleClose }) => {
                                 >
                                     +
                                 </button>
-                                <span>{counts[book.id]}</span>
+                                <span>{counts[book.id]||1}</span>
                                 <button
                                     onClick={() => handleDecrement(book.id)}
                                 >
                                     -
                                 </button>
                             </div>
+                            <CgClose
+                                className="close"
+                                onClick={() => handleDelete(book.id)}
+                            />
                         </div>
                     ))
                 ) : (
@@ -64,4 +70,4 @@ const AddToCart = ({ addToCartData, handleClose }) => {
     );
 };
 
-export default AddToCart
+export default AddToCart;
